@@ -74,6 +74,32 @@ public class main {
         Object t73=l.indexOf('n');
         System.out.println("n: " + t73);
 
+        //MyList<String> o = new MyList(a);
+
+       /* MyPair p1 = new MyPair(0,0);
+        MyPair p2 = new MyPair(1,1);
+        MyPair p3 = new MyPair(2,3);
+       // MyPair[] p = new MyPair[3];*/
+        //p = MyPair({p1,p2,p3});
+        /*for(int i=0; i<5; i++){
+            p[i].inicilization(i,i);
+        }*/
+        Object[] k = {1,2,3,4,5};
+        Object[] v = {11,12,13,14,15};
+        Map m = new Map(k,v);
+        m.put(1,9);
+        System.out.println(m.size());
+        System.out.println(m.remove(2));
+        System.out.println(m.get(2,20));
+        System.out.println(m.getEntries());
+        System.out.println(m.getKeys());
+        System.out.println(m.getValues());
+        System.out.println(m.get(0));
+        System.out.println(m.get(1));
+        System.out.println(m.keyContains(10));
+        System.out.println(m.keyContains(2));
+        System.out.println("All Good!");
+
     }
 
 

@@ -3,6 +3,8 @@ public class List {
     private Object[] arraylist;
     private int size = 0;
 
+    public List(){}
+
     public List(Object[] arr){
         int size = arr.length;
         arraylist = new Object[size];
@@ -28,15 +30,22 @@ public class List {
             }
     }
     public void add(Object obj) {
-        this.size=this.size+1;
-        Object[] arraytime;
-        arraytime = new Object[this.size];
-        System.arraycopy(arraylist,0,arraytime,0, this.size-1);
-        arraytime[this.size-1] = obj;
-        arraylist=null;
-        arraylist= new Object[this.size];
-        System.arraycopy(arraytime,0, arraylist, 0, this.size);
-        arraytime=null;
+        if(!isEmpty()) {
+            this.size = this.size + 1;
+            Object[] arraytime;
+            arraytime = new Object[this.size];
+            System.arraycopy(arraylist, 0, arraytime, 0, this.size - 1);
+            arraytime[this.size - 1] = obj;
+            arraylist = null;
+            arraylist = new Object[this.size];
+            System.arraycopy(arraytime, 0, arraylist, 0, this.size);
+            arraytime = null;
+        }
+        else{
+            this.size=1;
+            arraylist = new Object[1];
+            arraylist[0]=obj;
+        }
     }
     public void add(Object obj, int index) {
         this.size = this.size + 1;
