@@ -100,6 +100,67 @@ public class main {
         System.out.println(m.keyContains(2));
         System.out.println("All Good!");
 
+        Tree tree = new Tree();
+        Object[] obj = {5,8,10,9,3,4,1,7,11};
+        for(int i = 0; i<9; i++) {
+            Tree.Node n = tree.new Node(obj[i],i);
+            tree.addChild(n);
+            System.out.println(tree.getChild(i));
+        }
+        Tree.Node n = tree.new Node(8,1);
+        n.printPath();
+        Tree.Node n1 = tree.new Node(7,7);
+        n1.printPath();
+        Tree.Node n2 = tree.new Node(10,2);
+        Tree.Node n4 = tree.new Node(11,8);
+        Tree.Node n5 = tree.new Node(9,3);
+        Tree.Node n6 = tree.getChild(1);
+        System.out.println("left child 8: "+ n6.leftChild());
+        System.out.println("right child 8: "+ n6.rightChild());
+        System.out.println("-> " +n1.findParent(n4));
+        List l2 = tree.toList();
+        System.out.println("get: "+tree.getChild(4));
+        System.out.println("find: "+tree.find(3));
+        System.out.println("size: "+tree.size());
+        System.out.println(l2.get(0));
+        System.out.println(l2.get(1));
+        System.out.println(l2.get(2));
+        Tree tr = n6.subtree();
+        System.out.println("size subtree: "+tr.size());
+        System.out.println("subtree: "+tr.toList());
+
+        System.out.println("Parent n: " + n.getParent());
+        System.out.println("Parent n1: " + tree.getParent(n1));
+        System.out.println("get: " + tree.getChild(5));
+        System.out.println("remove: "+tree.removeChild(5));
+        System.out.println("find remove element: "+tree.find(4));
+        System.out.println("Parent: " + tree.getParent(n1));
+        System.out.println("remove: "+tree.removeChild(n));
+        System.out.println("find remove element: " +tree.find(8));
+        System.out.println("size: "+tree.size());
+        System.out.println(tree.toList());
+        System.out.println("Parent: " + tree.getParent(n1));
+        System.out.println("Parent: " + tree.getParent(n2));
+        System.out.println("find: "+tree.find(11));
+        System.out.println("get: " + tree.getChild(8));
+        System.out.println("find: "+tree.find(7));
+        System.out.println("get: " + tree.getChild(7));
+        System.out.println("Parent: " + tree.getParent(n2));
+        System.out.println("Parent: " + tree.getParent(n5));
+
+        Object r = 12;
+        Tree.Node nr = tree.new Node(r,11);
+        tree.addChild(nr);
+        System.out.println(tree.getChild(11));
+
+        Tree.Node n7 = tree.getChild(3);
+        System.out.println("left child 8: "+ n6.leftChild());
+        System.out.println("right child 8: "+ n6.rightChild());
+        Tree tr2 = n7.subtree();
+        System.out.println("size subtree: "+tr2.size());
+        System.out.println("subtree: "+tr2.toList());
+
+       // Node n3 = new Node(9,3);
     }
 
 

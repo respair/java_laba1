@@ -1,0 +1,408 @@
+public class Tree {
+
+    public int count=0;
+
+    public class Node {
+
+        public Node(){}
+
+        /* public Node(Object d){
+             data = d;
+             key = Tree.count;
+         }*/
+      /* public Node(Node d){
+
+       }*/
+        public Node(Object d, int in){
+            this.data = d;
+            this.key = in;
+        }
+
+        private int key; //ключ узла
+        private Object data; //некоторые данные в узле
+        private Node leftChild=null; //левый потомок
+        private Node rightChild=null; //правый потомок
+
+        @Override
+        public String toString() {
+            return "KEY: " + key + " DATA: " + data;
+        }
+
+        public Node leftChild(){
+            return leftChild;
+        }
+        public Node rightChild(){
+            return rightChild;
+        }
+
+        public Object getValue(){
+            return data;
+        }
+        public int getIndex(){
+            return key;
+        }
+
+        public void setRight(Node right){
+            rightChild = right;
+        }
+        public void setLeft(Node left){
+            leftChild = left;
+        }
+          public Node getParent(){
+             // Node n = new Node(this.data,this.key);
+              //Tree t = new Tree(this);
+              return Tree.this.getParent(this);
+          }
+        public Tree subtree(){
+            //  Node n = new Node(this.data,this.key);
+            //  System.out.println("left child: " + this.leftChild());
+            return new Tree(this);
+        }
+        public List path(){
+            Node parent = this.getParent();
+            List l = new List();
+            l.add(parent);
+            l.add(this);
+            return l;
+        }
+        public void printPath(){
+            List l = this.path();
+            System.out.println(l.get(0)+"-->"+l.get(1));
+        }
+
+        private List pathIn(Node node){
+            Node currentNode = root;
+            Object value = node.getValue();
+            List a = new List();
+            a.add(root.getIndex());
+            while (currentNode.getValue() != value) {
+                if ( (int)value < (int)currentNode.getValue()) {
+                    currentNode = currentNode.leftChild();
+                    a.add(currentNode.getIndex());
+                }
+                else {
+                    a.add(currentNode.getIndex());
+                    currentNode = currentNode.rightChild();
+                }
+
+                if (currentNode == null)
+                    return null;
+            }
+            return a;
+        }
+        public Node findParent(Node another){
+            List a1 = pathIn(this);
+            List a2 = pathIn(another);
+            for(int i=a1.size()-1;i>=0;i--){
+                for(int j=a2.size()-1;j>=0;j--){
+                    if(a1.get(i)==a2.get(j)) return getChild(i);
+                }
+            }
+              return root;
+        }
+    }
+
+    /*public static void changeCount(){
+        count++;
+    }*/
+    public int getCount(){
+        return count;
+    }
+    private Node root;
+
+    public Tree(){}
+
+    public Tree(Object d, int key){
+        root = new Node(d,key);
+        count+=1;
+    }
+
+    public Tree(Node d){
+        root = d;
+        count = countNodes(d);
+   //     System.out.println(count);
+    }
+   /* private int leftHeight(Node root){
+        int h=0;
+        while(root!=null){
+            root=root.leftChild();
+            h++;
+        }
+        return h;
+    }
+    private int rightHeight(Node root){
+        int h=0;
+        while(root!=null){
+            root=root.rightChild();
+            h++;
+        }
+        return h;
+    }*/
+    public int countNodes(Node root) {
+        if (root == null) { return 0; }
+        return 1 + countNodes(root.leftChild()) + countNodes(root.rightChild());
+    }
+  /*  public int countNodes(Node root) {
+        if(root==null)
+            return 0;
+        int lh=leftHeight(root);
+        int rh=rightHeight(root);
+        if(lh==rh)
+            return (1<<lh)-1;                                             //&&&&&&&&&&&&&&&&&&&&&& lh*lh-1
+     //   if(lh==1 && rh==1) return 1;
+        return countNodes(root.leftChild())+countNodes(root.rightChild())+1;
+
+    }*/
+    //public Tree(Object[] d){
+      /*  //Node newnode = root;
+        for(int i =0; i< m.size(); i++){
+           newnode.key=(int)k.get(i);
+           newnode.data=v.get(i);*/
+
+       // }
+    //}
+    public void addChild(Node item) {
+        Node newNode = item;
+        int k=item.getIndex();
+        if (root == null) {
+            root = newNode;
+            count+=1;
+        }
+        else {
+            Node current = root;
+            Node parent;
+            while (true) {
+                parent = current;
+                if(item.getValue() == current.getValue())    // если такой элемент уже есть, не сохраняем
+                    return;
+                else  if ((int)item.getValue() < (int)current.getValue()) {   // влево
+                    current = current.leftChild();
+                  //  System.out.println("+");
+                    if (current == null){
+                       // System.out.println("++");
+                        parent.leftChild = newNode;
+                        count+=1;
+                        return;
+                    }
+                }
+                else { // вправо
+                    current = current.rightChild();
+                    if (current == null) {
+                        //parent.setRight(newNode);
+                        parent.rightChild = newNode;
+                        count+=1;
+                        return;
+                    }
+                }
+            }
+        }
+    }
+
+    public Node find(Object value){
+        Node currentNode = root;
+        while (currentNode.getValue() != value) {
+            if ( (int)value < (int)currentNode.getValue())
+                currentNode = currentNode.leftChild();
+            else
+                currentNode = currentNode.rightChild();
+
+            if (currentNode == null)
+                return null;
+        }
+        return currentNode;
+    }
+    private Node find(Node root, int v){
+        //int h=0;
+        while(root!=null){
+            // root=root.rightChild();
+            if(root.rightChild()!=null)
+              if(root.rightChild().getIndex()==v)
+                return root.rightChild();
+            if(root.leftChild()!=null)
+              if(root.leftChild().getIndex()==v)
+                return root.leftChild();
+             Node n1 = find(root.rightChild(),v);
+             Node n2 = find(root.leftChild(),v);
+             if(n1!=null) return n1;
+             else if(n2!=null) return n2;
+             else return null;
+        }
+        return null;
+    }
+    public Node getChild(int index){
+        Node current = root;
+        if(root.getIndex()==index) return root;
+        else {
+            return find(current,index);
+        }
+
+    }
+    /*public Node getChild(int index){
+        Node currentNode = root;
+        while (currentNode.getIndex() != index) {
+            if ( (int)currentNode.getValue() < (int)currentNode.getValue())
+                currentNode = currentNode.leftChild();
+            else
+                currentNode = currentNode.rightChild();
+
+            if (currentNode == null)
+                return null;
+        }
+        return currentNode;
+    }*/
+
+    public Node getParent(Node item){
+        Node currentNode = root;
+        Node parentNode = root;
+        //Node node = getChild(index);
+        Object value=item.getValue();
+        boolean isLeftChild = true;
+        while (currentNode.getValue() != value) {
+            parentNode = currentNode;
+            if ((int) value < (int) currentNode.getValue()) {
+                isLeftChild = true;
+                currentNode = currentNode.leftChild();
+            } else {
+                isLeftChild = false;
+                currentNode = currentNode.rightChild();
+            }
+            if (currentNode == null)
+                return null; // yзел не найден
+        }
+        return parentNode;
+       /* Node currentNode = root;
+        Object value = item.getValue();
+        //Node parent = root;
+        Node parent2 = root;
+        Node parent3 = root;
+        int t = 0;
+        while (currentNode.getValue() != value) {
+            if ( (int)value < (int)currentNode.getValue())
+                currentNode = currentNode.leftChild;
+            else
+                currentNode = currentNode.rightChild;
+
+            if (currentNode == null)
+                return null;
+            if(t%2==0) parent2 = currentNode;
+            else parent3 = currentNode;
+            if(currentNode.getValue() == value && t%2==0) return parent3;
+            if(currentNode.getValue() == value && t%2!=0) return parent2;
+            t+=1;
+        }
+       return root;*/
+    }
+
+    private Node findHeir(Node node) { //ищем крайнего левого потомка правого потомка удаляемого узла и если это не правый потомок
+        // удаляемого узла делаем правый потом удаляемого узла правым потомком найденного конечного левого потомка
+        //аналогично с левым потомком удаляемго узла - он становится левым потомком найденного узла
+        // и если у этого левого потомка уже был какой-то правый потомок делаем его левым потомком родителя найденнного узла
+        Node parent = node;
+        Node heir = node;
+        Node currentNode = node.rightChild(); // перешли к правому потомку
+        while (currentNode != null) { // пока существуют левые потомки
+            parent = heir;// родительский узел отстает на два от каррент
+            heir = currentNode; //искомый отстает на 1
+            currentNode = currentNode.leftChild(); // переход к левому потомку (индификатор конца левых потомков)
+        }
+        if (heir != node.rightChild()) {
+            parent.setLeft(heir.rightChild());
+            heir.setRight(node.rightChild());
+            heir.setLeft(node.leftChild());
+        }
+        return heir;
+    }
+
+    public boolean removeChild(int index){
+        Node currentNode = root;
+        Node parentNode = root;
+        Node node = getChild(index);
+        Object value=node.getValue();
+        boolean isLeftChild = true;
+        while (currentNode.getValue() != value) {
+            parentNode = currentNode;
+            if ((int)value < (int)currentNode.getValue()) {
+                isLeftChild = true;
+                currentNode = currentNode.leftChild();
+            }
+            else {
+                isLeftChild = false;
+                currentNode = currentNode.rightChild();
+            }
+            if (currentNode == null)
+                return false;
+        }
+
+        if (currentNode.leftChild() == null && currentNode.rightChild() == null) { // узел просто удаляется, если не имеет потомков
+            if (currentNode == root) // если узел - корень, то дерево очищается
+                root = null;
+            else if (isLeftChild)
+                parentNode.setLeft(null); // если нет - узел отсоединяется, от родителя
+            else
+                parentNode.setRight(null);
+        }
+        else if (currentNode.rightChild() == null) { // узел заменяется левым поддеревом, тк правого потомка нет, левый есть
+            if (currentNode == root)
+                root = currentNode.leftChild();
+            else if (isLeftChild)
+                parentNode.setLeft(currentNode.leftChild());
+            else
+                parentNode.setRight(currentNode.leftChild());
+        }
+        else if (currentNode.leftChild() == null) { // узел меняется на правое поддерево
+            if (currentNode == root)
+                root = currentNode.rightChild();
+            else if (isLeftChild)
+                parentNode.setLeft(currentNode.rightChild());
+            else
+                parentNode.setRight(currentNode.rightChild());
+        }
+        else { // если есть два потомка, узел заменяется преемником (конечным левым узлом правого потомка удаляемого узла у
+            // которого правый узел указывает на правого потомка удаляемого узла
+            Node heir = findHeir(currentNode);
+            if (currentNode == root)
+                root = heir;
+            else if (isLeftChild)
+                parentNode.setLeft(heir);
+            else
+                parentNode.setRight(heir);
+        }
+        if(currentNode != null) currentNode = null;
+        count-=1;
+        return true;
+
+
+    }
+    public boolean removeChild(Node value){
+        return removeChild(value.getIndex());
+    }
+    private void toList(Node node, List list){
+        if(node!=null){
+           // list.add(node.getValue());
+            if(node.rightChild()!=null)
+                list.add(node.rightChild()); //.getValue());
+               // toList(node.rightChild,list);
+            if(node.leftChild()!=null)
+                list.add(node.leftChild());//.getValue());
+            if(node.rightChild()!=null)
+                toList(node.rightChild(),list);
+            if(node.leftChild()!=null)
+                toList(node.leftChild(),list);
+        }
+       // else return;
+    }
+    public List toList(){
+        List list = new List();
+        list.add(root);//.getValue());
+        toList(root,list);
+        return list;
+    }
+    public boolean isEmpty(){
+        if(count==0) return true;
+        else return false;
+    }
+    public int size(){
+        return count;
+    }
+
+}

@@ -134,8 +134,10 @@ public class List {
     @Override
     public String toString() {
         String str="";
-        for(int i = 0; i<this.size;i++)
-            str= str + arraylist[i]+" ";
+        for(int i = 0; i<this.size;i++) {
+            str = str + arraylist[i];
+            if(i<this.size-1) str=str+", ";
+        }
         return str;
 
     }
