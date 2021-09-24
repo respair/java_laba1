@@ -114,10 +114,13 @@ public class main {
         Tree.Node n2 = tree.new Node(10,2);
         Tree.Node n4 = tree.new Node(11,8);
         Tree.Node n5 = tree.new Node(9,3);
+        Tree.Node n8 = tree.new Node(3,4);
         Tree.Node n6 = tree.getChild(1);
         System.out.println("left child 8: "+ n6.leftChild());
         System.out.println("right child 8: "+ n6.rightChild());
         System.out.println("-> " +n1.findParent(n4));
+        System.out.println("-> " +n1.findParent(n1));
+        System.out.println("-> " +n1.findParent(n8));
         List l2 = tree.toList();
         System.out.println("get: "+tree.getChild(4));
         System.out.println("find: "+tree.find(3));
@@ -129,8 +132,8 @@ public class main {
         System.out.println("size subtree: "+tr.size());
         System.out.println("subtree: "+tr.toList());
 
-        System.out.println("Parent n: " + n.getParent());
-        System.out.println("Parent n1: " + tree.getParent(n1));
+        System.out.println("Parent 8: " + n.getParent());
+        System.out.println("Parent 7: " + tree.getParent(n1));
         System.out.println("get: " + tree.getChild(5));
         System.out.println("remove: "+tree.removeChild(5));
         System.out.println("find remove element: "+tree.find(4));

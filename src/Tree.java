@@ -93,12 +93,19 @@ public class Tree {
         public Node findParent(Node another){
             List a1 = pathIn(this);
             List a2 = pathIn(another);
+            if(a1==null || a2==null) return root;
+            if(another.getIndex()==this.getIndex()) return this.getParent();
             for(int i=a1.size()-1;i>=0;i--){
                 for(int j=a2.size()-1;j>=0;j--){
-                    if(a1.get(i)==a2.get(j)) return getChild(i);
+                    if(a1.get(i)==a2.get(j) && (int)a1.get(i)!=this.getIndex() &&
+                            (int)a2.get(j)!=another.getIndex()) return getChild((int)a1.get(i));
+                    else if(a1.get(i)==a2.get(j) && (int)a1.get(i)==this.getIndex())
+                        return getChild((int)a1.get(i)).getParent();
+                    else if(a1.get(i)==a2.get(j) && (int)a2.get(j)==another.getIndex())
+                        return getChild((int)a1.get(i)).getParent();
                 }
             }
-              return root;
+              return null;
         }
     }
 
