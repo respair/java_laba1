@@ -1,18 +1,11 @@
 public class Tree {
 
-    public int count=0;
+    private int count=0;
 
     public class Node {
 
         public Node(){}
 
-        /* public Node(Object d){
-             data = d;
-             key = Tree.count;
-         }*/
-      /* public Node(Node d){
-
-       }*/
         public Node(Object d, int in){
             this.data = d;
             this.key = in;
@@ -109,12 +102,8 @@ public class Tree {
         }
     }
 
-    /*public static void changeCount(){
-        count++;
-    }*/
-    public int getCount(){
-        return count;
-    }
+
+
     private Node root;
 
     public Tree(){}
@@ -129,45 +118,12 @@ public class Tree {
         count = countNodes(d);
    //     System.out.println(count);
     }
-   /* private int leftHeight(Node root){
-        int h=0;
-        while(root!=null){
-            root=root.leftChild();
-            h++;
-        }
-        return h;
-    }
-    private int rightHeight(Node root){
-        int h=0;
-        while(root!=null){
-            root=root.rightChild();
-            h++;
-        }
-        return h;
-    }*/
+
     public int countNodes(Node root) {
         if (root == null) { return 0; }
         return 1 + countNodes(root.leftChild()) + countNodes(root.rightChild());
     }
-  /*  public int countNodes(Node root) {
-        if(root==null)
-            return 0;
-        int lh=leftHeight(root);
-        int rh=rightHeight(root);
-        if(lh==rh)
-            return (1<<lh)-1;                                             //&&&&&&&&&&&&&&&&&&&&&& lh*lh-1
-     //   if(lh==1 && rh==1) return 1;
-        return countNodes(root.leftChild())+countNodes(root.rightChild())+1;
 
-    }*/
-    //public Tree(Object[] d){
-      /*  //Node newnode = root;
-        for(int i =0; i< m.size(); i++){
-           newnode.key=(int)k.get(i);
-           newnode.data=v.get(i);*/
-
-       // }
-    //}
     public void addChild(Node item) {
         Node newNode = item;
         int k=item.getIndex();
@@ -244,19 +200,7 @@ public class Tree {
         }
 
     }
-    /*public Node getChild(int index){
-        Node currentNode = root;
-        while (currentNode.getIndex() != index) {
-            if ( (int)currentNode.getValue() < (int)currentNode.getValue())
-                currentNode = currentNode.leftChild();
-            else
-                currentNode = currentNode.rightChild();
 
-            if (currentNode == null)
-                return null;
-        }
-        return currentNode;
-    }*/
 
     public Node getParent(Node item){
         Node currentNode = root;
@@ -277,27 +221,7 @@ public class Tree {
                 return null; // yзел не найден
         }
         return parentNode;
-       /* Node currentNode = root;
-        Object value = item.getValue();
-        //Node parent = root;
-        Node parent2 = root;
-        Node parent3 = root;
-        int t = 0;
-        while (currentNode.getValue() != value) {
-            if ( (int)value < (int)currentNode.getValue())
-                currentNode = currentNode.leftChild;
-            else
-                currentNode = currentNode.rightChild;
 
-            if (currentNode == null)
-                return null;
-            if(t%2==0) parent2 = currentNode;
-            else parent3 = currentNode;
-            if(currentNode.getValue() == value && t%2==0) return parent3;
-            if(currentNode.getValue() == value && t%2!=0) return parent2;
-            t+=1;
-        }
-       return root;*/
     }
 
     private Node findHeir(Node node) { //ищем крайнего левого потомка правого потомка удаляемого узла и если это не правый потомок

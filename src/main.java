@@ -163,10 +163,38 @@ public class main {
         System.out.println("size subtree: "+tr2.size());
         System.out.println("subtree: "+tr2.toList());
 
-       // Node n3 = new Node(9,3);
+
+       /* Tree4Index tree2 = new Tree4Index();
+        Object[] obj2 = {'a','e','x','k','b','c','g','m','y'};
+        int[] obj = {5,8,10,9,3,4,1,7,11};
+        for(int i = 0; i<9; i++) {
+            Tree4Index.Node n10 = tree2.new Node(obj2[i],obj[i]);
+            tree2.addChild(n10);
+            System.out.println(tree2.getChild(obj[i]));
+        }
+
+        System.out.println("find: "+tree2.find('c'));
+        System.out.println("size: "+tree2.size());
+        Tree4Index.Node n = tree2.new Node('e',8);
+        n.printPath();
+        Tree4Index.Node n1 = tree2.new Node('m',7);
+        n1.printPath();
+        System.out.println("Parent e: " + n.getParent());
+        System.out.println("Parent m: " + tree2.getParent(n1));
+        System.out.println(tree2.toList());
+        Tree4Index.Node n6 = tree2.getChild(8);
+        Tree4Index tr = n6.subtree();
+        System.out.println("size subtree: "+tr.size());
+        System.out.println("subtree: "+tr.toList());
+
+        System.out.println("remove: "+tree2.removeChild(4));
+        System.out.println("find remove element: "+tree2.find('c'));
+        //System.out.println("Parent: " + tree.getParent(n1));
+        System.out.println("remove: "+tree2.removeChild(n));
+        System.out.println("find remove element: " +tree2.find('e'));
+        System.out.println(tree2.toList());
+*/
+
     }
-
-
-
 
 }
