@@ -13,6 +13,21 @@ public class Map {
    }*/
    public Map(Object[] key_, Object[] value_){
       int size = key_.length;
+      for(int i=0;i< key_.length;i++) {
+         for (int j = i + 1; j < key_.length; j++)
+            if (key_[i] == key_[j]) {
+               System.out.println("map не может иметь несколько одинаковых ключей!");
+               System.exit(1);
+            }
+         if(key_[i]==null){
+            System.out.println("ключ не может иметь значение null!");
+            System.exit(1);
+         }
+      }
+      if(key_.length!= value_.length){
+         System.out.println("количество значений не равно количеству ключей!");
+         System.exit(1);
+      }
       key = new List(key_);
       value = new List(value_);
       this.size = size;
