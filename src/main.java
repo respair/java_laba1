@@ -73,7 +73,7 @@ public class main {
         System.out.println("m: " + t72);
         Object t73=l.indexOf('n');
         System.out.println("n: " + t73);
-
+        System.out.println("List good");
         //MyList<String> o = new MyList(a);
 
        /* MyPair p1 = new MyPair(0,0);
@@ -98,7 +98,7 @@ public class main {
         System.out.println(m.get(1));
         System.out.println(m.keyContains(10));
         System.out.println(m.keyContains(2));
-        System.out.println("All Good!");
+        System.out.println("map good!");
 
         Tree tree = new Tree();
         Object[] obj = {5,8,10,9,3,4,1,7,11};
@@ -194,7 +194,7 @@ public class main {
         System.out.println("find remove element: " +tree2.find('e'));
         System.out.println(tree2.toList());
 */
-
+        System.out.println("tree good!");
     }
 
 }
