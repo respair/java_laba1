@@ -15,11 +15,11 @@ public class Map {
       int size = key_.length;
       for(int i=0;i< key_.length;i++) {
          for (int j = i + 1; j < key_.length; j++)
-            if (key_[i] == key_[j]) {
+            if (key_[i].equals(key_[j])) {
                System.out.println("map не может иметь несколько одинаковых ключей!");
                System.exit(1);
             }
-         if(key_[i]==null){
+         if(key_[i].equals(null)){
             System.out.println("ключ не может иметь значение null!");
             System.exit(1);
          }
@@ -36,8 +36,9 @@ public class Map {
 
    private int getIndex(Object key_){
       for(int i=0; i<this.size; i++){
-         if(key.get(i) == key_)
+         if(key.get(i) == key_) {
             return i;
+         }
       }
       return -1;
    }
@@ -52,8 +53,9 @@ public class Map {
    }
    public Object get(Object key_, Object bydefault){
       int i = getIndex(key_);
-      if(value.get(i) != null)
+      if(value.get(i)!=null){   //здесь вылетает ошибка, если заменить на if(!value.get(i).equals(null))
          return value.get(i);
+      }
       else {
          value.set(bydefault,i);
          return bydefault;
@@ -66,8 +68,8 @@ public class Map {
       return time;
    }
    public boolean keyContains(Object key_){
-      if(getIndex(key_)!=-1) return true;
-      else return false;
+      if(getIndex(key_)!=-1) { return true; }
+      else { return false; }
    }
    public List getKeys(){
       return key;
@@ -87,8 +89,8 @@ public class Map {
       return size;
    }
    public boolean isEmpty(){
-      if(size==0) return true;
-      else return false;
+      if(size==0) {return true;}
+      else { return false; }
    }
 
 
