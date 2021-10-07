@@ -17,17 +17,19 @@ public class List {
         arraylist = new Object[size];
         this.size = size;
         int size_arr = arr.length;
-        if(size_arr < size)
-            for(int i=0; i < size; i++){
-                if(i<size_arr)
+        if(size_arr < size) {
+            for (int i = 0; i < size; i++) {
+                if (i < size_arr)
                     arraylist[i] = arr[i];
                 else
                     arraylist[i] = null;
+            }
         }
-        if(size_arr >= size)
-            for(int i=0; i < size; i++){
+        if(size_arr >= size) {
+            for (int i = 0; i < size; i++) {
                 arraylist[i] = arr[i];
             }
+        }
     }
     public void add(Object obj) {
         if(!isEmpty()) {
@@ -48,10 +50,10 @@ public class List {
         }
     }
     public void add(Object obj, int index) {
-        this.size = this.size + 1;
         if (index >= this.size - 1 || index < 0)
             add(obj);
         else {
+            this.size = this.size + 1;
             Object[] arraytime;
             arraytime = new Object[this.size];
             System.arraycopy(arraylist, 0, arraytime, 0, this.size - 1);
@@ -73,7 +75,14 @@ public class List {
         if(index==this.size-1){
             this.size=size-1;
             Object time = arraylist[this.size];
-            arraylist[this.size]=null;
+           // arraylist[this.size]=null;
+            Object[] arraytime;
+            arraytime = new Object[this.size];
+            System.arraycopy(arraylist, 0, arraytime, 0, this.size);
+            arraylist=null;
+            arraylist = new Object[this.size];
+            System.arraycopy(arraytime, 0, arraylist, 0, this.size);
+            arraytime = null;
             return time;
         }
         else {
@@ -86,22 +95,32 @@ public class List {
                 if(k+1<this.size+1)
                   time = arraylist[k + 1];
             }
-            arraylist[this.size] = null;
+            //arraylist[this.size] = null;
+            Object[] arraytime;
+            arraytime = new Object[this.size];
+            System.arraycopy(arraylist, 0, arraytime, 0, this.size);
+            arraylist=null;
+            arraylist = new Object[this.size];
+            System.arraycopy(arraytime, 0, arraylist, 0, this.size);
+            arraytime = null;
             return t;
 
         }
 
     }
     public Object get(int index){
-        if(index>=0 && index <= this.size-1)
+        if(index>=0 && index <= this.size-1) {
             return arraylist[index];
-        else
+        }
+        else {
             return null;
+        }
     }
     public Object set(Object obj, int index){
         Object t = get(index);
-        if(index>=0 && index < this.size-1)
-           arraylist[index]=obj;
+        if(index>=0 && index <= this.size-1) {
+            arraylist[index] = obj;
+        }
         return t;
     }
     public int size(){
@@ -109,25 +128,30 @@ public class List {
     }
 
     public boolean isEmpty(){
-        if(this.size == 0)
+        if(this.size == 0) {
             return true;
-        else
+        }
+        else {
             return false;
+        }
 
     }
     public boolean contains(Object obj){
         for(int i = 0; i< this.size; i++)
-            if(get(i)==obj)
+            if(get(i).equals(obj)) {
                 return true;
+            }
         return false;
     }
     public int indexOf(Object obj){
-        if(!contains(obj))
+        if(!contains(obj)) {
             return -1;
+        }
         else {
             for (int i = 0; i < this.size; i++)
-                if (get(i) == obj)
+                if (get(i).equals(obj)) {
                     return i;
+                }
             return -1;
         }
     }
@@ -136,7 +160,7 @@ public class List {
         String str="";
         for(int i = 0; i<this.size;i++) {
             str = str + arraylist[i];
-            if(i<this.size-1) str=str+", ";
+            if(i<this.size-1) { str=str+", "; }
         }
         return str;
 
