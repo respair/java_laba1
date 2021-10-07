@@ -55,11 +55,11 @@ public class NormTree {
             NNode m = this;
             n = n.firstChild;
             //if (n == null) return false;
-            if (m.data == value.data && m.key == value.key && m.parent != null) return removeChild(m.parent);
+            if (m.data.equals(value.data) && m.key == value.key && m.parent != null) { return removeChild(m.parent); }
            // else if (m.data == value.data && m.key == value.key){
                // System.out.println("вы собираетесь удалить узел дерева,"+tree.size());
             //}
-            else if (m.data == value.data && m.key == value.key && m.parent == null) {
+            else if (m.data.equals(value.data) && m.key == value.key && m.parent == null) {
                // System.out.println("!!!!!!!!!!!!");
                 //System.out.println(m);
                 m = m.firstChild;
@@ -92,11 +92,11 @@ public class NormTree {
                 reIndex(0, root);
                 return true;
             }
-            if (n == null) return false;
-            while (n.data != value.data && n.key != value.key) {
+            if (n == null) {return false;}
+            while ((!n.data.equals(value.data)) && n.key != value.key) {
                 m = n;
                 n = n.friendChild;
-                if (n == null) return false;
+                if (n == null) {return false;}
             }
             m.friendChild = n.friendChild;
             if (n.firstChild != null) {
@@ -119,13 +119,13 @@ public class NormTree {
         }
 
         public NNode getChild(int index) {
-            if (index < 0) return null;
-            if (this.firstChild == null) return null;
-            if (index == 0) return this.firstChild;
+            if (index < 0) {return null;}
+            if (this.firstChild == null) {return null;}
+            if (index == 0) {return this.firstChild;}
             int i = 1;
             NNode n = this.firstChild.friendChild;
             while (n != null) {
-                if (index == i) return n;
+                if (index == i) {return n;}
                 i++;
                 n = n.friendChild;
             }
@@ -156,7 +156,7 @@ public class NormTree {
             l.add(n);
 
             n=n.friendChild;
-            if(n.key!=this.key) l.add(n);
+            if(n.key!=this.key) {l.add(n);}
             while(n.key!=this.key){
                 n=n.friendChild;
                 l.add(n);
@@ -191,10 +191,10 @@ public class NormTree {
           //  System.out.println("an: "+an);
             for(int i =0; i<l.size();i++)
                 for(int j=0;j<an.size();j++){
-                    if(an.get(j)==l.get(i)){
-                        if((int)an.get(j) ==this.key) return this.getParent();
-                        else if((int)an.get(j) == another.key) return another.getParent();
-                        else return NormTree.this.getChildTree((int)an.get(j));
+                    if(an.get(j).equals(l.get(i))){
+                        if((int)an.get(j) ==this.key) {return this.getParent();}
+                        else if((int)an.get(j) == another.key) {return another.getParent();}
+                        else { return NormTree.this.getChildTree((int)an.get(j));}
                     }
                 }
             return null;
@@ -204,9 +204,10 @@ public class NormTree {
 
         public NormTree(NNode node) {
             root = node;
-            if(node.firstChild!=null)
-              count=count-node.firstChild.key+1;
-            else count = 1;
+            if(node.firstChild!=null) {
+                count = count - node.firstChild.key + 1;
+            }
+            else {count = 1;}
         }
 
         public NormTree(Object value) {
@@ -215,7 +216,7 @@ public class NormTree {
         }
 
         private void reIndex(int index, NNode node) {
-            if (root == null) return;
+            if (root == null) {return;}
             NNode new_ = node;
             NNode n = node;
             node.key = index;
@@ -281,57 +282,62 @@ public class NormTree {
         if (n.friendChild != null) {
             index2++;
             node = getChildTree_(index, index2, n.friendChild);
-            if (node.key == index)
+            if (node.key == index) {
                 return node;
+            }
         }
         if (n.firstChild != null) {
             index2++;
             node = getChildTree_(index,  index2, n.firstChild);
-            if (node.key == index)
+            if (node.key == index) {
                 return node;
+            }
         }
 
         return node;
     }
 
     public NNode getChildTree(int index) {
-        if (root==null) return null;
-        if (index < 0 || index >=count) return null;
-        if(index==0) return root;
+        if (root==null){ return null;}
+        if (index < 0 || index >=count){ return null;}
+        if(index==0) {return root;}
         NNode n = getChildTree_(index, 0, root);
-        if(n.key==index) return n;
-        else return null;
+        if(n.key==index) {return n;}
+        else {return null;}
     }
     private NNode find_(Object value, NNode node){
-        if (node.data == value)
+        if (node.data.equals(value)) {
             return node;
+        }
         NNode n = node;
         if (n.friendChild != null) {
             node = find_(value, n.friendChild);
-            if (node.data == value)
+            if (node.data.equals(value)) {
                 return node;
+            }
         }
         if (n.firstChild != null) {
             node = find_(value, n.firstChild);
-            if (node.data == value)
+            if (node.data.equals(value)) {
                 return node;
+            }
         }
 
         return node;
     }
     public NNode find(Object value){
-            if(root==null) return null;
-            if(root.data==value) return root;
+            if(root==null) {return null;}
+            if(root.data==value) {return root;}
             NNode n = find_(value,root);
-        if(n.data==value) return n;
-        else return null;
+        if(n.data.equals(value)) { return n;}
+        else{ return null;}
     }
     public int size(){
             return count;
     }
     public boolean isEmpty(){
-            if(count==0) return true;
-            else return false;
+            if(count==0) {return true;}
+            else {return false;}
     }
 }
 
