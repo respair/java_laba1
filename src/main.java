@@ -9,19 +9,27 @@ public class main {
         System.out.println(Arrays.toString(a));
         System.out.println("созданный список:");
         System.out.println(l);
+        Object ss = l.size();
+        System.out.println("size: " + ss);
 
         System.out.println("добавление в конец:");
         //l.add(11);
         l.add('n');
+        Object s = l.size();
+        System.out.println("size: " + s);
         System.out.println(l);
         System.out.println("добавление по индексу:");
         //l.add(4,3);
         l.add('c',2);
         System.out.println(l);
+        Object sss = l.size();
+        System.out.println("size: " + sss);
 
         System.out.println("удаление:");
         Object t1 = l.remove(10);
         System.out.println(l);
+        Object ss_ = l.size();
+        System.out.println("size: " + ss_);
         System.out.println(t1);
         Object t2 = l.remove(1);
         System.out.println(l);
@@ -84,13 +92,18 @@ public class main {
         /*for(int i=0; i<5; i++){
             p[i].inicilization(i,i);
         }*/
+        System.out.println("MAP: ");
         Object[] k = {1,2,3,4,5};
         Object[] v = {11,12,13,14,15};
         Map m = new Map(k,v);
+        System.out.println(m.getEntries());
         m.put(1,9);
+        System.out.println(m.getEntries());
         System.out.println(m.size());
         System.out.println(m.remove(2));
         System.out.println(m.get(2,20));
+        m.put(5,100);
+       // System.out.println(m.get(1,100));
         System.out.println(m.getEntries());
         System.out.println(m.getKeys());
         System.out.println(m.getValues());
